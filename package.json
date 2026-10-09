@@ -1,0 +1,20 @@
+{
+  "name": "eduguru-root",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "setup": "npm install && npm install --prefix backend && npm install --prefix frontend",
+    "build": "npm run build --prefix frontend && rm -rf dist && cp -r frontend/dist ./dist",
+    "start": "npx pm2 start ecosystem.config.cjs",
+    "start:node": "node backend/server.js",
+    "restart": "npx pm2 restart ecosystem.config.cjs",
+    "stop": "npx pm2 stop ecosystem.config.cjs",
+    "logs": "npx pm2 logs eduguru",
+    "deploy": "bash deploy.sh",
+    "dev": "concurrently \"npm run dev --prefix frontend\" \"npm run dev --prefix backend\"",
+    "clean": "rm -rf frontend/dist && rm -rf dist"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
